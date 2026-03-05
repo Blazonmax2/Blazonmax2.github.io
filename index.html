@@ -12,6 +12,18 @@
 </head>
 <body>
     <h1 id="greeting">Hello, World!</h1>
+    <div style="margin-bottom: 1em;">
+        <button id="btnLogic">Logické hodnoty</button>
+        <button id="btnStringCompare">Porovnanie riadkov</button>
+        <button id="btnPrompt">Prompt</button>
+        <button id="btnConfirm">Confirm</button>
+        <button id="btnIf">Podmienka if/else</button>
+    <button id="btnWhile">Cyklus while</button>
+    <button id="btnFor">Cyklus for</button>
+    <button id="btnFuncBasic">Funkcia: základ</button>
+    <button id="btnFuncParam">Funkcia: s parametrom</button>
+    <button id="btnFuncReturn">Funkcia: návratová hodnota</button>
+    </div>
     <button id="toggle">Toggle Greeting</button>
     <button id="Change">Change background</button>
     <input type="text" id="nameInput" placeholder="Enter your name" />
@@ -23,7 +35,74 @@
     <div id="counter">0</div>
 
     <script>
+    document.getElementById('btnWhile').onclick = function() {
+        var i = 0;
+        var result = '';
+        while (i < 3) {
+            result += i + ' ';
+            i++;
+        }
+        alert('Výsledok while: ' + result.trim());
+    };
+    document.getElementById('btnFor').onclick = function() {
+        var result = '';
+        for (var i = 0; i < 3; i++) {
+            result += i + ' ';
+        }
+        alert('Výsledok for: ' + result.trim());
+    };
+    document.getElementById('btnFuncBasic').onclick = function() {
+        function showMessage() {
+            alert('Ahojte priatelia!');
+        }
+        showMessage();
+    };
+    document.getElementById('btnFuncParam').onclick = function() {
+        function showMessage(from, text) {
+            from = '**' + from + '**';
+            alert(from + ': ' + text);
+        }
+        showMessage('Eva', 'Ahoj!');
+        showMessage('Eva', 'Ako sa máš?');
+    };
+    document.getElementById('btnFuncReturn').onclick = function() {
+        function sum(a, b) {
+            return a + b;
+        }
+        var test = sum(2, 5);
+        alert('sum(2, 5) = ' + test);
+    };
         
+        
+        document.getElementById('btnLogic').onclick = function() {
+            alert('2 > 1: ' + (2 > 1)); 
+            alert('2 == 1: ' + (2 == 1)); 
+            alert('2 != 1: ' + (2 != 1)); 
+            var a = true;
+            var b = 3 > 4;
+            alert('b = 3 > 4: ' + b); 
+            alert('a == b: ' + (a == b)); 
+        };
+        document.getElementById('btnStringCompare').onclick = function() {
+            alert("'B' > 'A': " + ('B' > 'A'));
+        };
+        document.getElementById('btnPrompt').onclick = function() {
+            var years = prompt('Koľko máte rokov?', 100);
+            alert('Máte ' + years + ' rokov!');
+        };
+        document.getElementById('btnConfirm').onclick = function() {
+            var isAdmin = confirm('Ste administrátor?');
+            alert(isAdmin);
+        };
+        document.getElementById('btnIf').onclick = function() {
+            var year = prompt('V akom roku vznikla akadémia ITSTEP?', '');
+            if (year != 2011) {
+                alert('A je to..');
+                alert('..nesprávne!');
+            } else {
+                alert('Si dobrý!');
+            }
+        };
         const greeting = document.getElementById('greeting');
         const btn = document.getElementById('toggle');
         const changeBgBtn = document.getElementById('Change');
@@ -34,8 +113,19 @@
         const counter = document.getElementById("counter");
         const resetCounter = document.getElementById("resetCounter");
         let clickCount = 0;
-        var input = prompt("Please enter your name:");
+        const input = prompt("Please enter your name:");
+        const alertt = confirm("Do you want to proceed?");
+        let x = 1;
+        x = -x;
+        alert(x);
+        alert ( 15 % 2 )
 
+        if (alertt == true) {
+            alert("Hello, " + input + "! Welcome to my website!");
+        } else {
+            alert("Goodbye!");
+            window.location.href = "https://www.google.com";
+        }
         btn.addEventListener('click', () => {
             greeting.textContent = greeting.textContent === 'Hello, World!'
                 ? 'Hello from JavaScript!'
