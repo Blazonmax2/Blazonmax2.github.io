@@ -5,9 +5,82 @@
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>Hello World</title>
     <style>
-        body { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; padding: 2rem; }
-        button { margin-top: 1rem; padding: .5rem 1rem; }
-        button:hover { background: #e51c1c; }
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: #f6f7fb;
+            min-height: 100vh;
+            margin: 0;
+            padding: 2rem 0 0 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        button {
+            background: linear-gradient(90deg, #4e54c8, #8f94fb);
+            color: #fff;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 28px;
+            font-size: 1.1em;
+            margin: 8px 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(78,84,200,0.12);
+            transition: transform 0.15s, box-shadow 0.15s, background 0.3s;
+            outline: none;
+        }
+        button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 6px 20px rgba(78,84,200,0.18);
+            background: linear-gradient(90deg, #8f94fb, #4e54c8);
+        }
+        button:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(78,84,200,0.10);
+        }
+        input[type="number"], input[type="text"] {
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #bfc0c0;
+            font-size: 1em;
+            margin-right: 8px;
+            outline: none;
+            transition: border 0.2s;
+        }
+        input[type="number"]:focus, input[type="text"]:focus {
+            border: 1.5px solid #4e54c8;
+        }
+        p {
+            font-size: 1.2em;
+            color: #333;
+        }
+        #result {
+            margin-top: 24px;
+            font-size: 1.5em;
+            color: #4e54c8;
+            min-height: 2em;
+            transition: color 0.3s, transform 0.2s;
+        }
+        #result.correct {
+            color: #2ecc40;
+            animation: pop 0.4s;
+        }
+        #result.wrong {
+            color: #e74c3c;
+            animation: shake 0.4s;
+        }
+        @keyframes pop {
+            0% { transform: scale(1); }
+            60% { transform: scale(1.25); }
+            100% { transform: scale(1); }
+        }
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            20% { transform: translateX(-8px); }
+            40% { transform: translateX(8px); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+            100% { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
@@ -163,10 +236,13 @@
         document.getElementById('submitGuess').onclick = function() {
             let userGuess = Number(document.getElementById("guess").value);
             let result = document.getElementById("result");
+            result.classList.remove('correct', 'wrong');
             if (userGuess === randomNumber) {
                 result.textContent = "Correct! You guessed it!";
+                result.classList.add('correct');
             } else {
                 result.textContent = "Wrong! Try again.";
+                result.classList.add('wrong');
             }
         }
         // Also log to the console
