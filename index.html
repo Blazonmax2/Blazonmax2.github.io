@@ -236,14 +236,16 @@
         document.getElementById('submitGuess').onclick = function() {
             let userGuess = Number(document.getElementById("guess").value);
             let result = document.getElementById("result");
-            result.classList.remove('correct', 'wrong');
-            if (userGuess === randomNumber) {
-                result.textContent = "Correct! You guessed it!";
-                result.classList.add('correct');
-            } else {
-                result.textContent = "Wrong! Try again.";
-                result.classList.add('wrong');
-            }
+                result.classList.remove('correct', 'wrong');
+                // Force reflow to restart animation
+                void result.offsetWidth;
+                if (userGuess === randomNumber) {
+                    result.textContent = "Correct! You guessed it!";
+                    result.classList.add('correct');
+                } else {
+                    result.textContent = "Wrong! Try again.";
+                    result.classList.add('wrong');
+                }
         }
         // Also log to the console
         console.log('Page loaded: Hello, World!');
